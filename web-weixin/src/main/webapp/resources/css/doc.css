@@ -1,0 +1,80 @@
+/*!
+ * 临时使用样式文件.
+ */
+ article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+	display: block;
+}
+.clearfix{
+	zoom: 1;
+	display: inline-block;
+	_height: 1px;
+}
+body{
+ 	font-family: Georgia,serif;
+	background: #F0F0F0;
+	color: #444;
+	line-height: 1.5;
+	margin:0;
+ }
+header.header {
+	height:150px;
+	width:100%;
+}
+.inner {
+	width: 1020px;
+	margin: 0 auto;
+	position: relative;
+	height: 100%;
+}
+.main {
+	margin-bottom: 1.5em;
+	padding: 1.25em 0 0;
+	background: white;
+	-webkit-box-shadow: 0 10px 30px rgba(0,0,0,.3);
+	-moz-box-shadow: 0 10px 30px rgba(0,0,0,.3);
+	box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+ 
+h2 {
+	font: 18px Arial,Helvetica,sans-serif;
+	color: #060;
+	margin: 0 0 12px 0;
+	line-height: 150%;
+}
+
+h3 {
+	font: 16px Arial,Helvetica,sans-serif;
+	color: #060;
+	margin: 0 0 12px 0;
+	line-height: 150%;
+}
+
+h2 .ll{
+	margin-right:10px;
+	display:block;
+	float: left;
+}
+h2.ql a{
+	margin: 3px 5px 0 5px;
+	font-size: 12px;
+	line-height: 12px;
+	float: left;
+	padding: 2px;
+	white-space: nowrap;	
+}
+.primary {
+	width: 66.8113208%;
+	float: left;
+	margin-left: 1.851851851851852%;
+	border-right: 3px solid #F0F0F0;
+	padding-right: 1.7157895%;
+}
+.secondary {
+	width: 26.530189%;
+	float: right;
+	margin-right: 1.311851851851852%;
+}
+.meta span{
+	margin-right:10px;
+	font-size: 13px;
+}

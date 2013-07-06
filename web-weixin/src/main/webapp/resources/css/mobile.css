@@ -1,0 +1,47 @@
+.ui-header{background-image:-moz-linear-gradient(12% 93% 90deg,#EA9508, #004E25, #004E25 0%,#4D9471 99%);background-image:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4D9471), to(#EA9508), color-stop(.9,#004E25),color-stop(.9,#EA9508));-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorStr='#4D9471',EndColorStr='#004e25')";-moz-box-shadow: 0px 5px 6px rgba(0,0,0,.3);-webkit-box-shadow: 0px 5px 6px rgba(0,0,0,.3);box-shadow: 0px 5px 6px rgba(0,0,0,.3);}
+.ui-header .ui-title{margin: 0.3em 70px 0.7em 10px;background-image:url(../images/logo-page.png);background-repeat:no-repeat;background-position:0 0px;width:178px;height:40px;}
+.ui-content{background-color:#fff;overflow:hidden;color:#444;text-shadow:0 1px 1px #f6f6f6;text-decoration:none;-moz-box-shadow:0 1px 4px rgba(0,0,0,.3);-webkit-box-shadow:0 1px 4px rgba(0,0,0,.3);box-shadow:0 1px 4px rgba(0,0,0,.3);}
+
+#home .ui-header{
+	position: relative;
+	height: 5px;
+	background: #EA9508;
+}
+#home .ui-content {
+background: -webkit-gradient( radial, 50% 80%, 10, 50% 80%, 550, from(#4D9471), color-stop(0.4, #015229), to(#015229) );
+background: -webkit-gradient( radial, 50% 80%, 10, 50% 80%, 550, from(#4D9471), color-stop(0.4, #015229), to(#015229) );
+}
+#home .ui-link-inherit{
+	background:url(images/football.jpg) no-repeat;
+	padding-left:85px;
+	height: 82px;
+}
+#home .basketball{
+	background-position:0 82px;
+}
+
+#promoLink {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	background-image: url(images/feedbackbubbles.png);
+	background-repeat: no-repeat;
+	background-position: 10px 5px;
+	background-color: rgba(255, 255, 255, .2);
+	padding: 10px 20px 10px 47px;
+	-moz-box-shadow: 0px 5px 6px rgba(0, 0, 0, .3);
+	-webkit-box-shadow: 0px 5px 6px rgba(0, 0, 0, .3);
+	box-shadow: 0px 5px 6px rgba(0, 0, 0, .3);
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 90%;
+	font-weight: bold;
+	color: #DDD;
+	text-shadow: 0 -1px 2px black;
+	height: 20px;
+	text-decoration: none;
+	display: block;
+	width: 200px;
+}

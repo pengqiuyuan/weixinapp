@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:oauth="http://www.springframework.org/schema/security/oauth2"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+                           http://www.springframework.org/schema/security/oauth2 http://www.springframework.org/schema/security/spring-security-oauth2.xsd 
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+  
+  	<context:component-scan base-package="com.weixin.app.web.security" />
+  	<beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <beans:property name="basename" value="classpath:securityMessages_zh_CN"/>  
+    </beans:bean>    
+    <beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver"/>
+	<!-- Ignore Config -->
+	
+	<http pattern="/resources/**" security="none"/>
+	<!-- Need config. -->
+	
+	<!-- Manager Secure Config -->
+	
+    <http use-expressions="true" pattern="/mgr/**" auto-config="false" entry-point-ref="authenticationEntryPoint">
+        
+      <intercept-url pattern="/mgr/index" access="hasRole('ADMIN') or hasRole('SUBMITOR')" />
+      <intercept-url pattern="/mgr/games/**" access="hasRole('ADMIN') or hasRole('SUBMITOR')" />
+		
+        <custom-filter position="LOGOUT_FILTER" ref="logoutFilter"/>                
+        <custom-filter position="FORM_LOGIN_FILTER" ref="authenticationProcessingFilter" />
+        <session-management session-authentication-strategy-ref="sas" />
+    </http>
+    
+    <beans:bean id="authenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        <beans:property name="loginFormUrl" value="/mgr/login" />
+    </beans:bean>    
+    
+    <beans:bean id="authenticationProcessingFilter" class="com.weixin.app.web.security.MgrSecureAuthenticationFilter">
+        <beans:property name="sessionAuthenticationStrategy" ref="sas" />
+        <beans:property name="authenticationManager" ref="authenticationManager" />
+        <beans:property name="filterProcessesUrl" value="/mgr/login_check"></beans:property>
+        <beans:property name="authenticationSuccessHandler" ref="successHandler" />
+        <beans:property name="authenticationFailureHandler" ref="failureHandler" />
+
+    </beans:bean>
+    
+    <beans:bean id="successHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+        <beans:property name="defaultTargetUrl" value="/mgr/index" />
+    </beans:bean>
+    
+    <beans:bean id="failureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <beans:property name="defaultFailureUrl" value="/mgr/index" />
+    </beans:bean>
+    
+    <beans:bean id="sas" class="org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy">
+        <beans:constructor-arg name="sessionRegistry" ref="sessionRegistry" />
+        <beans:property name="maximumSessions" value="1" />
+    </beans:bean>
+    
+    <beans:bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl" />
+    
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider ref="daoAuthenticationProvider"/>
+    </authentication-manager>
+    
+    <beans:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <beans:property name="userDetailsService" ref="mgrUserService" />
+        <beans:property name="passwordEncoder" ref="md5PasswordEncoder" />
+        <beans:property name="saltSource" ref="saltSource"/>
+    </beans:bean>
+    <beans:bean id="md5PasswordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" >
+    </beans:bean>    
+                
+    <beans:bean id="logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
+        <beans:constructor-arg value="/mgr/login" />
+        <beans:constructor-arg>
+            <beans:list>
+                <beans:bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler">
+                </beans:bean>
+            </beans:list>
+        </beans:constructor-arg>
+        <beans:property name="filterProcessesUrl" value="/mgr/logout"></beans:property>
+    </beans:bean>
+    
+    <beans:bean id="saltSource" class="org.springframework.security.authentication.dao.ReflectionSaltSource">
+        <beans:property name="userPropertyToUse" value="getEmail" />
+    </beans:bean>
+    
+    <beans:bean id="mgrUserService" class="com.weixin.app.web.security.ManagerUserDetailsService">
+    	<beans:property name="userDao" ref="userDao"/>
+	</beans:bean>
+	
+    
+	<!-- 定时器 -->
+<!-- 	<beans:bean id="gameScheduled" class="com.huake.schedual.GameScheduled">
+	</beans:bean>
+	
+	<beans:bean id="scheduledTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+    	<beans:property name="delay" value="10000" />
+    	<beans:property name="period" value="86400000" />
+    	<beans:property name="timerTask" ref="gameScheduled" />
+	</beans:bean>
+	
+	<beans:bean id="timerFactory" class="org.springframework.scheduling.timer.TimerFactoryBean">
+   		 <beans:property name="scheduledTimerTasks">
+       		 <beans:list>
+           	 	<beans:ref bean="scheduledTask" />
+       		 </beans:list>
+   		 </beans:property>
+	</beans:bean> -->
+	
+	<!-- API Secure Config //TODO userDetailsService与mgr冲突，待解决。
+	
+	<http pattern="/api/**" auto-config="false" create-session="stateless" entry-point-ref="digestEntryPoint">
+		<intercept-url pattern="/api/v1/**" access="hasRole('CLIENT')"/>
+		<http-basic/>
+		<custom-filter ref="digestFilter" after="BASIC_AUTH_FILTER"/>
+	</http>
+	
+	<beans:bean id="digestFilter" class="org.springframework.security.web.authentication.www.DigestAuthenticationFilter">
+		<beans:property name="userDetailsService" ref="apiUserDetailsService"/>
+		<beans:property name="authenticationEntryPoint" ref="digestEntryPoint" />
+	</beans:bean>
+	
+	<beans:bean id="digestEntryPoint" class="org.springframework.security.web.authentication.www.DigestAuthenticationEntryPoint">
+		<beans:property name="realmName" value="Contacts Realm via Digest Authentication" />
+		<beans:property name="key" value="acegi" />
+	</beans:bean>
+	
+	<beans:bean id="apiUserDetailsService" class="..."></beans:bean>
+	
+	-->
+</beans:beans>

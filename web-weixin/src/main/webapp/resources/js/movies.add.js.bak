@@ -1,0 +1,43 @@
+movies_poster_upload=function(upload,statu){
+	var btnUpload=upload;
+	var status=statu;
+	new AjaxUpload(btnUpload, {
+		action: 'mgr/movies/uploadPoster',
+		name: 'qqfile',
+		responseType: 'json',
+		onSubmit: function(file, ext){
+			 if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){ 
+                // extension is not allowed 
+				status.text('只能上传图片');
+				return false;
+			}
+			status.text('Uploading...');
+		},
+		onComplete: function(file, response){
+			//On completion clear the status
+			status.text('');
+			var newFileName=response.newFileName;
+			
+			//Add uploaded file to list
+			if(response!="error"){
+				var lis=$('<li></li>').appendTo('#files').html('<input type="hidden" value="'+newFileName+'"/><img src="'+newFileName+'"/>'+file,name).addClass('success');
+				$('<a href="javascript:return;">删除</a>').click(function (){
+					movies_poster_posterDel(lis);
+					//alert(lis.find('input[type="hidden"]').val());
+				}).appendTo(lis);
+			} else{
+				$('<li></li>').appendTo('#files').text(file).addClass('error');
+			}
+		}
+	});
+
+}
+movies_poster_posterDel=function(liObj){
+	$.ajax({
+		  url: "mgr/movies/delPoster?fileName="+liObj.find('input[type="hidden"]').val(),
+		  dataType:'json',
+		  success: function(data){
+			  liObj.remove();
+		  }
+		});
+}

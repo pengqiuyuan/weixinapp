@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<decorators defaultdir="/decorators">
+
+	<excludes>
+
+    </excludes>
+
+	<decorator name="mgr" page="mgr.jsp">
+		<pattern>/mgr/*</pattern>
+	</decorator>
+	
+	<decorator name="portal" page="portal.jsp">
+		<pattern>/portal/weixin/**</pattern>
+	</decorator>
+    
+</decorators>

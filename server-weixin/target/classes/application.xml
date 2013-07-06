@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+        default-autowire="byName">
+    <context:component-scan base-package="com.weixin.app" />
+    
+	
+    <!-- 环境相关的设-->
+    <util:properties id="envProps" location="classpath:/application.properties"/>
+    
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/weixinapp?useUnicode=true&amp;characterEncoding=utf-8" />
+        <property name="username" value="root" />
+        <property name="password" value="" /> 
+        
+        <property name="maxIdle" value="-1" />
+        <property name="maxActive" value="-1" />
+        <property name="maxWait" value="10000" />
+ 		<property name="validationQuery" value="SELECT 1"/>
+		<property name="removeAbandoned" value="true"/>  
+		<property name="removeAbandonedTimeout" value="30"/>
+		<property name="minEvictableIdleTimeMillis" value="300000"/>
+		<property name="numTestsPerEvictionRun" value="3"/>
+		<property name="testOnBorrow" value="true"/>
+		<property name="testWhileIdle" value="true"/>
+		<property name="testOnReturn" value="true"/>
+    </bean>
+    
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="namingStrategy">
+            <bean class="org.hibernate.cfg.ImprovedNamingStrategy" />
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">false</prop>
+                <prop key="hibernate.cache.use_query_cache">false</prop>
+                <prop key="hibernate.query.substitutions">true=1, false=0</prop>
+                <prop key="hibernate.cache.use_second_level_cache">false</prop>
+                <prop key="hibernate.max_fetch_depth">2</prop>  
+                <prop key="hibernate.jdbc.fatch_size">100</prop>
+                <prop key="hibernate.jdbc.batch_size">50</prop> 
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+        <property name="packagesToScan" value="com.weixin.app.model" />
+    </bean>
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+    
+    <!-- import submodule config -->
+    <!-- <import resource="classpath:/application_scheduling.xml"/> -->
+	<aop:aspectj-autoproxy />
+	
+	<!-- <bean id="beanMapper" class="org.dozer.DozerBeanMapper"/> -->
+    
+    <!-- <bean id="bizMessageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>bizmessages</value>
+			</list>
+		</property>
+	</bean> -->
+	
+	<!-- Jcaptcha相关的配置 -->  
+    <bean id="captchaService"  
+        class="com.octo.captcha.service.image.DefaultManageableImageCaptchaService">  
+        <property name="captchaEngine">  
+            <bean class="com.weixin.app.jcaptcha.GMailEngine" />  
+        </property>  
+        <!-- 默认生成的图片180秒过期 , 可另行设置   
+        <property name="minGuarantedStorageDelayInSeconds" value="180" />  
+        -->  
+    </bean>  
+	
+</beans>
