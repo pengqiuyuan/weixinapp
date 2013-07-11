@@ -25,7 +25,7 @@ import org.codehaus.jackson.map.ser.std.DateSerializer;
  */
 @Entity
 @javax.persistence.Table(name = "t_movies")
-public class WeiXinMovie implements Serializable{
+public class Movie implements Serializable{
 
 	/**
 	 * 

@@ -1,118 +1,73 @@
-package com.weixin.app.model.weixin;
+package com.weixin.app.model.conditions;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.map.ser.std.DateSerializer;
+import com.weixin.app.orm.annotation.OperatorType;
+import com.weixin.app.model.weixin.Dress;
+import com.weixin.app.orm.SimpleQueryCondition;
+import com.weixin.app.orm.annotation.SimpleQueryProperty;
 
 /**
- * 
+ * 服饰查询条件
  * @author pengqiuyuan
- * 服饰的实体类
  *
  */
-@Entity
-@javax.persistence.Table(name = "t_dresses")
-public class WeiXinDress implements Serializable{
+@SuppressWarnings("serial")
+public class DressConditions extends SimpleQueryCondition{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	public DressConditions() {
+		super(Dress.class);
+	}
 	
-	/**
-	 * id
-	 */
-	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
 	/**
 	 * 商家名称
 	 */
-	@Column(name = "name")
 	private String name;
 	
 	/**
 	 * 地点   华林店  五四店
 	 * 先用list，一个商家 可能有连锁店 ，  用对象关联
 	 */
-	@Column(name = "address")
 	private String address;
 	
 	/**
 	 * 推荐服饰
 	 */
-	@Column(name = "dress_recommend")
 	private String dressRecommend;
-	
-	/**
-	 * 活动开始时间
-	 */
-	@Column(name = "start_date")
-	@JsonSerialize(using = DateSerializer.class)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date startDate;
-	
-	/**
-	 * 活动结束时间
-	 */
-	@Column(name = "over_date")
-	@JsonSerialize(using = DateSerializer.class)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date overDate;
 	
 	/**
 	 * 优惠描述
 	 */
-	@Column(name = "discount",length = 100)
 	private String discount;
 	
 	/**
 	 * 优惠细则
 	 */
-	@Column(name = "discount_rules")
-	@Lob
 	private String discountRules;
 	
 	/**
 	 * 经度
 	 */
-	@Column(name = "longitude", precision = 15, scale = 10)
 	private BigDecimal longitude;
 	/**
 	 * 纬度
 	 */
-	@Column(name = "latitude", precision = 15, scale = 10)
 	private BigDecimal latitude;
 	
 	/**
 	 * 评分
 	 */
-	@Column(name = "rating")
 	private BigDecimal rating;
 	
 	
 	/**
 	 * 缩略图
 	 */
-	@Column(name = "thumbail")
 	private String thumbail;
-
-
+	
+	@SimpleQueryProperty(operator=OperatorType.EQ,property = "id")
 	public Integer getId() {
 		return id;
 	}
@@ -122,7 +77,7 @@ public class WeiXinDress implements Serializable{
 		this.id = id;
 	}
 
-
+	@SimpleQueryProperty(operator = OperatorType.LIKE, property = "name")
 	public String getName() {
 		return name;
 	}
@@ -132,6 +87,7 @@ public class WeiXinDress implements Serializable{
 		this.name = name;
 	}
 
+	@SimpleQueryProperty(operator=OperatorType.EQ,property = "address")
 	public String getAddress() {
 		return address;
 	}
@@ -141,7 +97,7 @@ public class WeiXinDress implements Serializable{
 		this.address = address;
 	}
 
-
+	@SimpleQueryProperty(operator=OperatorType.EQ,property = "dressRecommend")
 	public String getDressRecommend() {
 		return dressRecommend;
 	}
@@ -151,27 +107,7 @@ public class WeiXinDress implements Serializable{
 		this.dressRecommend = dressRecommend;
 	}
 
-
-	public Date getStartDate() {
-		return startDate;
-	}
-
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-
-	public Date getOverDate() {
-		return overDate;
-	}
-
-
-	public void setOverDate(Date overDate) {
-		this.overDate = overDate;
-	}
-
-
+	@SimpleQueryProperty(operator=OperatorType.EQ,property = "discount")
 	public String getDiscount() {
 		return discount;
 	}
@@ -181,7 +117,7 @@ public class WeiXinDress implements Serializable{
 		this.discount = discount;
 	}
 
-
+	@SimpleQueryProperty(operator=OperatorType.EQ,property = "discountRules")
 	public String getDiscountRules() {
 		return discountRules;
 	}
@@ -191,7 +127,7 @@ public class WeiXinDress implements Serializable{
 		this.discountRules = discountRules;
 	}
 
-
+	@SimpleQueryProperty(operator=OperatorType.EQ,property = "longitude")
 	public BigDecimal getLongitude() {
 		return longitude;
 	}
@@ -201,7 +137,7 @@ public class WeiXinDress implements Serializable{
 		this.longitude = longitude;
 	}
 
-
+	@SimpleQueryProperty(operator=OperatorType.EQ,property = "latitude")
 	public BigDecimal getLatitude() {
 		return latitude;
 	}
@@ -211,7 +147,7 @@ public class WeiXinDress implements Serializable{
 		this.latitude = latitude;
 	}
 
-
+	@SimpleQueryProperty(operator=OperatorType.EQ,property = "rating")
 	public BigDecimal getRating() {
 		return rating;
 	}
@@ -221,7 +157,7 @@ public class WeiXinDress implements Serializable{
 		this.rating = rating;
 	}
 
-
+	@SimpleQueryProperty(operator=OperatorType.EQ,property = "thumbail")
 	public String getThumbail() {
 		return thumbail;
 	}
@@ -232,4 +168,5 @@ public class WeiXinDress implements Serializable{
 	}
 	
 	
+
 }

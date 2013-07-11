@@ -20,17 +20,18 @@ import org.codehaus.jackson.map.ser.std.DateSerializer;
 /**
  * 
  * @author pengqiuyuan
- * id 名称  地点  活动时间  电话  介绍 缩略图  经\纬度
+ * 服饰的实体类
+ *
  */
 @Entity
-@javax.persistence.Table(name = "t_foods")
-public class WeiXinFood implements Serializable{
+@javax.persistence.Table(name = "t_dresses")
+public class Dress implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * id
 	 */
@@ -47,16 +48,16 @@ public class WeiXinFood implements Serializable{
 	
 	/**
 	 * 地点   华林店  五四店
-	 * 先用，一个商家 可能有连锁店 ，  用对象关联
+	 * 先用list，一个商家 可能有连锁店 ，  用对象关联
 	 */
 	@Column(name = "address")
 	private String address;
 	
 	/**
-	 * 美食推荐
+	 * 推荐服饰
 	 */
-	@Column(name = "food_recommend")
-	private String foodRecommend;
+	@Column(name = "dress_recommend")
+	private String dressRecommend;
 	
 	/**
 	 * 活动开始时间
@@ -141,13 +142,13 @@ public class WeiXinFood implements Serializable{
 	}
 
 
-	public String getFoodRecommend() {
-		return foodRecommend;
+	public String getDressRecommend() {
+		return dressRecommend;
 	}
 
 
-	public void setFoodRecommend(String foodRecommend) {
-		this.foodRecommend = foodRecommend;
+	public void setDressRecommend(String dressRecommend) {
+		this.dressRecommend = dressRecommend;
 	}
 
 
@@ -231,5 +232,4 @@ public class WeiXinFood implements Serializable{
 	}
 	
 	
-
 }
