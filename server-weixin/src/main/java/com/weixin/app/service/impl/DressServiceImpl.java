@@ -20,7 +20,7 @@ import com.weixin.app.orm.PageRequest;
 import com.weixin.app.service.weixin.DressService;
 
 /**
- * 服饰服务的实现 
+ * 服饰服务的实�?
  * @author pengqiuyuan
  *
  */
