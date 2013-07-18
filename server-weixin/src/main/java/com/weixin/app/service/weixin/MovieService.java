@@ -14,7 +14,8 @@ import com.weixin.app.orm.PageRequest;
  */
 public interface MovieService {
 	/**
-	 * �?��服饰列表，分�?	 * 根据项目查询条件查询结构列表，带分页参数
+	 * 所有服饰列表，分页
+	 * 根据项目查询条件查询结构列表，带分页参数
 	 */
 	public Page<Movie> findDressByCond(MovieCondtions cond, PageRequest pageRequest);
 	/**

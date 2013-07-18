@@ -15,7 +15,7 @@ import com.weixin.app.orm.PageRequest;
 public interface DressService {
 
 	/**
-	 * �?��服饰列表，分�?	 * 根据项目查询条件查询结构列表，带分页参数
+	 * 根据项目查询条件查询结构列表，带分页参数
 	 */
 	public Page<Dress> findDressByCond(DressConditions cond, PageRequest pageRequest);
 	/**
