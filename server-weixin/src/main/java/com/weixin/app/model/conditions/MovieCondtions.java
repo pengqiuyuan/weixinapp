@@ -2,6 +2,8 @@ package com.weixin.app.model.conditions;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+
 import com.weixin.app.model.weixin.Movie;
 import com.weixin.app.orm.SimpleQueryCondition;
 import com.weixin.app.orm.annotation.OperatorType;
@@ -73,6 +75,13 @@ public class MovieCondtions extends SimpleQueryCondition{
 	 * 缩略图<规格, 地址>
 	 */
 	private String thumbail;
+	
+	/**
+	 * 缩略图，用于PC端展示
+	 */
+	private String largeThumbail;
+	
+	
 
 	@SimpleQueryProperty(operator = OperatorType.LIKE, property = "name")
 	public String getName() {
@@ -172,5 +181,15 @@ public class MovieCondtions extends SimpleQueryCondition{
 	public void setThumbail(String thumbail) {
 		this.thumbail = thumbail;
 	}
+
+	@SimpleQueryProperty(operator=OperatorType.EQ,property = "largeThumbail")
+	public String getLargeThumbail() {
+		return largeThumbail;
+	}
+
+	public void setLargeThumbail(String largeThumbail) {
+		this.largeThumbail = largeThumbail;
+	}
+	
 	
 }

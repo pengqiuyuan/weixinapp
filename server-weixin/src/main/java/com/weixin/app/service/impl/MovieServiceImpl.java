@@ -19,7 +19,7 @@ import com.weixin.app.orm.PageRequest;
 import com.weixin.app.service.weixin.MovieService;
 
 /**
- * 电影服务的实�? * @author pengqiuyuan
+ * 电影服务* @author pengqiuyuan
  *
  */
 @Service("movieService")
@@ -75,6 +75,7 @@ public class MovieServiceImpl implements MovieService{
 		mov.setSummary(movie.getSummary());
 		mov.setStartDate(movie.getStartDate());
 		mov.setThumbail(movie.getThumbail());
+		mov.setLargeThumbail(movie.getLargeThumbail());
 		mov.setType(movie.getType());
 		movieDao.update(mov);
 	}

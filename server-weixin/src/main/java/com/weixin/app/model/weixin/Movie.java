@@ -117,11 +117,18 @@ public class Movie implements Serializable{
 	@Column(name = "actor" , length = 100)
 	private String actor;
 	
-	/**
-	 * 缩略图<规格, 地址>
+	
+    /**
+	 * 缩略图，用于手机展示
 	 */
 	@Column(name = "thumbail")
 	private String thumbail;
+	
+	/**
+	 * 缩略图，用于PC端展示
+	 */
+	@Column(name = "large_thumbail")
+	private String largeThumbail;
 	
 	/**
 	 * 上映日期，区分国内外上映时间
@@ -322,5 +329,14 @@ public class Movie implements Serializable{
 	public void setOverDate(Date overDate) {
 		this.overDate = overDate;
 	}
+
+	public String getLargeThumbail() {
+		return largeThumbail;
+	}
+
+	public void setLargeThumbail(String largeThumbail) {
+		this.largeThumbail = largeThumbail;
+	}
+	
 	
 }

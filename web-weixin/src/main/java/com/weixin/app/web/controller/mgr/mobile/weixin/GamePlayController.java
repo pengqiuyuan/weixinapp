@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import com.weixin.app.web.controller.mgr.mobile.BasePortalController;
 
 
 /**
@@ -17,7 +16,7 @@ import com.weixin.app.web.controller.mgr.mobile.BasePortalController;
  */
 @Controller("mobileWeixinController")
 @RequestMapping("/mobile/weixin/*")
-public class GamePlayController extends BasePortalController {
+public class GamePlayController {
 	
 	private static Logger logger = LoggerFactory.getLogger(GamePlayController.class);
 	

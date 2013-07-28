@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.weixin.app.service.weixin.DressService;
-import com.weixin.app.web.controller.mgr.BaseController;
 /**
  * 服饰管理
  * @author pengqiuyuan
@@ -16,7 +15,7 @@ import com.weixin.app.web.controller.mgr.BaseController;
  */
 @Controller
 @RequestMapping("/mgr/weixin/dress/*")
-public class DressController extends BaseController{
+public class DressController{
 	
 	private  final static Logger logger = LoggerFactory.getLogger(DressController.class);
 	

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+
+	<display-name>weixinapp</display-name>
+
+	<welcome-file-list>
+		<welcome-file></welcome-file>
+	</welcome-file-list>
+
+	<!-- The context params that read by ContextLoaderListener -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:/application.xml,/WEB-INF/spring/security.xml</param-value>
+	</context-param>
+    
+    <context-param> 
+    	<param-name>defaultHtmlEscape</param-name> 
+    	<param-value>true</param-value>
+    </context-param>
+    
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+    <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
+    </listener>
+	<!-- <listener>
+		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+	</listener> -->
+	
+	<!-- Spring 刷新Introspector防止内存泄露 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>weixinapp</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/springmvc-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>weixinapp</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<filter>  
+	    <filter-name>HiddenHttpMethodFilter</filter-name>  
+	    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>  
+	</filter>
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	
+	<filter>
+        <filter-name>hibernateOpenSessionInViewFilter</filter-name>
+        <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+    </filter>
+	<filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+	</filter>
+	
+<!-- 	<filter>
+		<filter-name>OAuthFilter</filter-name>
+		<filter-class>com.huake.filter.OAuthFilter</filter-class>
+	</filter> -->
+	<filter-mapping>  
+	    <filter-name>HiddenHttpMethodFilter</filter-name>  
+	    <servlet-name>weixinapp</servlet-name>  
+	</filter-mapping>  
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+        <filter-mapping>
+        <filter-name>hibernateOpenSessionInViewFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- JCaptcha`s filter -->   
+    <filter>   
+        <filter-name>jcaptchaFilter</filter-name>   
+        <filter-class>com.weixin.app.jcaptcha.JCaptchaFilter</filter-class>   
+        <init-param>   
+            <param-name>failureUrl</param-name>   
+            <param-value>/mgr/login</param-value>   
+        </init-param>   
+    </filter>
+       
+    <!-- jcaptcha图片生成URL. -->   
+    <filter-mapping>   
+        <filter-name>jcaptchaFilter</filter-name>   
+        <url-pattern>/jcaptcha.jpg</url-pattern>   
+    </filter-mapping>
+    
+    <filter-mapping>   
+        <filter-name>jcaptchaFilter</filter-name>   
+        <url-pattern>/mgr/login_check</url-pattern>   
+    </filter-mapping>
+     
+   <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+   <!--  <filter-mapping>
+        <filter-name>JacksonFilter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>JacksonFilter</filter-name>
+        <url-pattern>/mgr/commons/*</url-pattern>
+    </filter-mapping> -->
+	<jsp-config>
+		<taglib>  
+	        <taglib-uri>http://www.huake.com/functions</taglib-uri>  
+	        <taglib-location>/WEB-INF/tld/JSTLFunction.tld</taglib-location>  
+        </taglib>
+		<taglib>  
+	        <taglib-uri>http://www.huake.com/functions</taglib-uri>  
+	        <taglib-location>/WEB-INF/tld/JSTLFunction.tld</taglib-location>  
+        </taglib>
+	</jsp-config> 
+</web-app>

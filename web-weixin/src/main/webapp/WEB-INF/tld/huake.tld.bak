@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+		version="2.0">
+
+	<description>huake JSP Tag Library</description>
+	<tlib-version>3.0</tlib-version>
+	<short-name>huake</short-name>
+	<uri>http://www.huake.com/tags</uri>
+
+	<tag>
+		<description>
+			判断某个域是否包含错误.
+		</description>
+		<name>hasBindFieldError</name>
+		<tag-class>com.weixin.app.web.tags.BindFieldErrorTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<description>The name of the bean in the request, that needs to be
+			inspected for errors. If errors are available for this bean, they
+			will be bound under the 'errors' key.</description>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The name of the bean in the request, that needs to be
+			inspected for errors. If errors are available for this bean, they
+			will be bound under the 'errors' key.</description>
+			<name>field</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set HTML escaping for this tag, as boolean value.
+			Overrides the default HTML escaping setting for the current page.</description>
+			<name>htmlEscape</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<description>
+			数据字典面面格式标签
+		</description>
+		<name>dictViewFormatter</name>
+		<tag-class>com.huake.web.tags.DictViewFormatterTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>className</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>

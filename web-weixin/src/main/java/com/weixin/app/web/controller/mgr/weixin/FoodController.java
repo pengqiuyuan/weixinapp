@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.weixin.app.service.weixin.FoodService;
-import com.weixin.app.web.controller.mgr.BaseController;
 /**
  * 美食管理
  * @author pengqiuyuan
@@ -16,7 +15,7 @@ import com.weixin.app.web.controller.mgr.BaseController;
  */
 @Controller
 @RequestMapping("/mgr/weixin/food/*")
-public class FoodController extends  BaseController{
+public class FoodController {
 
 	private final static Logger logger = LoggerFactory.getLogger(FoodController.class);
 	

@@ -18,8 +18,9 @@ import com.weixin.app.orm.Page;
 import com.weixin.app.orm.PageRequest;
 import com.weixin.app.service.weixin.FoodService;
 
+
 /**
- * 美食服务的实�? * @author pengqiuyuan
+ * 美食服务的实�? * @author pengqiuyuan
  *
  */
 @Service("foodService")
