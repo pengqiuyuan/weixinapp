@@ -1,6 +1,9 @@
 package com.weixin.app.model.conditions;
 
 import java.math.BigDecimal;
+
+import javax.persistence.Column;
+
 import com.weixin.app.model.weixin.Food;
 import com.weixin.app.orm.annotation.OperatorType;
 import com.weixin.app.orm.SimpleQueryCondition;
@@ -65,6 +68,11 @@ private Integer id;
 	 * 缩略图
 	 */
 	private String thumbail;
+	
+	/**
+	 * 缩略图，用于PC端展示
+	 */
+	private String largeThumbail;
 	
 	@SimpleQueryProperty(operator=OperatorType.EQ,property = "id")
 	public Integer getId() {
@@ -164,4 +172,16 @@ private Integer id;
 	public void setThumbail(String thumbail) {
 		this.thumbail = thumbail;
 	}
+
+	@SimpleQueryProperty(operator=OperatorType.EQ,property = "largeThumbail")
+	public String getLargeThumbail() {
+		return largeThumbail;
+	}
+
+
+	public void setLargeThumbail(String largeThumbail) {
+		this.largeThumbail = largeThumbail;
+	}
+	
+	
 }

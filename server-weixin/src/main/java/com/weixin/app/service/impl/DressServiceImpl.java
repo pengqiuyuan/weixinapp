@@ -70,6 +70,7 @@ public class DressServiceImpl implements DressService{
 		dre.setRating(dress.getRating());
 		dre.setStartDate(dress.getStartDate());
 		dre.setThumbail(dress.getThumbail());
+		dre.setLargeThumbail(dress.getLargeThumbail());
 		this.dressDao.update(dre);
 	}
 

@@ -69,6 +69,7 @@ public class FoodServiceImpl implements FoodService{
 		fo.setRating(food.getRating());
 		fo.setStartDate(food.getStartDate());
 		fo.setThumbail(food.getThumbail());
+		fo.setLargeThumbail(food.getLargeThumbail());
 		this.foodDao.update(fo);
 	}
 

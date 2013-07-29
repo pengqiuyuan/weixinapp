@@ -103,7 +103,6 @@ public class MovieController {
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	public String update(@ModelAttribute Movie movie,BindingResult result,SessionStatus status) throws AppBizException{
 		ModelAndView mav=new ModelAndView();
-		System.out.println(movie.getLargeThumbail() + "00000000000");
 		this.movieService.updateMovie(movie);
 		return "redirect:/mgr/weixin/movie/index";
 	}

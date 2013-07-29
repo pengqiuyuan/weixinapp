@@ -111,6 +111,12 @@ public class Dress implements Serializable{
 	 */
 	@Column(name = "thumbail")
 	private String thumbail;
+	
+	/**
+	 * 缩略图，用于PC端展示
+	 */
+	@Column(name = "large_thumbail")
+	private String largeThumbail;
 
 
 	public Integer getId() {
@@ -229,6 +235,16 @@ public class Dress implements Serializable{
 
 	public void setThumbail(String thumbail) {
 		this.thumbail = thumbail;
+	}
+
+
+	public String getLargeThumbail() {
+		return largeThumbail;
+	}
+
+
+	public void setLargeThumbail(String largeThumbail) {
+		this.largeThumbail = largeThumbail;
 	}
 	
 	

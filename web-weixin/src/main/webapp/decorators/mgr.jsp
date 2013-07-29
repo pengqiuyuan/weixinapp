@@ -46,7 +46,10 @@
 			            <li class="dropdown" id="app">
 			              <a href="#" class="dropdown-toggle" data-toggle="dropdown">应用管理 <b class="caret"></b></a>
 			              <ul class="dropdown-menu">
-			              	<li><a href="<%=request.getContextPath()%>/mgr/weixin/movie/index">影片管理</a></li>      </ul>
+			              	<li><a href="<%=request.getContextPath()%>/mgr/weixin/movie/index">影片管理</a></li>  
+			              	<li><a href="<%=request.getContextPath()%>/mgr/weixin/food/index">美食管理</a></li>
+			              	<li><a href="<%=request.getContextPath()%>/mgr/weixin/dress/index">服饰管理</a></li>    
+			              	</ul>
 			            </li>
 			            
 			           	<li class="dropdown" id="mobile">
